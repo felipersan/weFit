@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import Home from '../flows/repositories/home'
 import Favorites from '../flows/favorites'
 import { useRepository } from '../hooks/useRepository'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const Tab = createBottomTabNavigator()
 
@@ -24,8 +25,26 @@ export default function BottomRouter() {
         }
       }}
     >
-      <Tab.Screen name="Tela 1" component={Home} />
-      <Tab.Screen name="Tela 2" component={Favorites} />
+      <Tab.Screen
+        name="Tela 1"
+        component={Home}
+        options={{
+          tabBarLabel: 'Repositórios',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="github" color={color} size={26} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Tela 2"
+        component={Favorites}
+        options={{
+          tabBarLabel: 'Favoritos',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="star" color={color} size={26} />
+          )
+        }}
+      />
     </Tab.Navigator>
   )
 }
