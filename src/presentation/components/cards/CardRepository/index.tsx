@@ -55,7 +55,7 @@ const CardRepository = ({ data, marginTop }: props) => {
                 console.log('clicou no botão')
               }}
               iconPosition={'left'}
-              title={'Seguir'}
+              title={'Favoritar'}
             />
 
             <FavoritesArea>
