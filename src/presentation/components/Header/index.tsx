@@ -13,7 +13,11 @@ const Header = (props: Props) => {
       <Container>
         <Text>{props.title}</Text>
 
-        <Button onPress={props.onPress}>
+        <Button
+          onPress={() => {
+            props.onPress()
+          }}
+        >
           <SettingsIcon />
         </Button>
       </Container>

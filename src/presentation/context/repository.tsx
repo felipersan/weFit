@@ -1,4 +1,7 @@
 import React, { createContext, useState } from 'react'
+import { useEffect } from 'react'
+import { repositorie } from '../../@types/repositories'
+import { useGetAllRepositoriesByNickName } from '../../infrastructure/http/repositories/GET/useGetAllRepositories'
 import UserSelectionModal from '../components/UserSelectionModal'
 
 type Children = { children: JSX.Element }
@@ -15,8 +18,8 @@ type Repository = {
 }
 
 export type RepositoryContextData = {
-  repositories: Repository[]
-  favorites: Repository[]
+  repositories: Array<repositorie> | undefined
+  favorites: Array<repositorie> | undefined
   getUserRepositories: (user: string) => Promise<void>
   toggleUserSelectionModal: () => void
   addFavoriteRepository: (repository: Repository) => void
@@ -29,8 +32,9 @@ export const RepositoryContext = createContext<RepositoryContextData>(
 
 export const RepositoryProvider = ({ children }: Children) => {
   const [showModal, setShowModal] = useState(false)
-  const [favorites, setFavorites] = useState<Repository[]>([])
-  const [repositories, setRepositories] = useState<Repository[]>([])
+  const [favorites, setFavorites] = useState<Array<repositorie>>()
+  const [repositories, setRepositories] = useState<Array<repositorie>>()
+  const [allRepos, setAllRepos] = useState<Array<repositorie>>()
   const [repositoryOwner, setRepositoryOwner] = useState('appswefit')
 
   const toggleUserSelectionModal = () => setShowModal(value => !value)
@@ -43,9 +47,13 @@ export const RepositoryProvider = ({ children }: Children) => {
     // TODO
   }
 
-  const getUserRepositories = async (user: string) => {
-    // TODO
-  }
+  const getUserRepositories = async (user: string) => {}
+
+  const { allRepositories } = useGetAllRepositoriesByNickName(repositoryOwner)
+
+  useEffect(() => {
+    setRepositories(allRepositories)
+  }, [allRepositories])
 
   return (
     <RepositoryContext.Provider
@@ -62,6 +70,9 @@ export const RepositoryProvider = ({ children }: Children) => {
       <UserSelectionModal
         visible={showModal}
         onClose={() => setShowModal(false)}
+        onSearch={(nickName: string) => {
+          setRepositoryOwner(nickName)
+        }}
       />
     </RepositoryContext.Provider>
   )

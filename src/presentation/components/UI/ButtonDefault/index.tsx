@@ -12,6 +12,7 @@ interface IProps {
   full: boolean
   title: string
   font: 'bold' | 'regular' | 'medium'
+  size?: string
 }
 
 const Button = ({
@@ -23,19 +24,34 @@ const Button = ({
   Press,
   full,
   font,
-  title
+  title,
+  size
 }: IProps) => {
   return (
     <ButtonContainer
       font={font}
       full={full}
       bgColor={bgColor && bgColor}
-      color={color && color}
+      color={color}
       shadow={shadow}
-      onPress={Press}
+      onPress={() => {
+        Press()
+      }}
     >
       {icon && iconPosition === 'left' && <ImageIcon source={icon} />}
-      <TextButton>{title}</TextButton>
+      <TextButton
+        font={font}
+        full={full}
+        bgColor={bgColor && bgColor}
+        color={color}
+        shadow={shadow}
+        onPress={() => {
+          Press()
+        }}
+        size={size}
+      >
+        {title}
+      </TextButton>
       {icon && iconPosition === 'rigth' && <ImageIcon source={icon} />}
     </ButtonContainer>
   )

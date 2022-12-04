@@ -8,7 +8,8 @@ export default {
     WHITE: '#fff',
     YELLOW: '#FFD02C',
     LIGTH_YELLOW: '#FAF3DC',
-    RED: '#F22828'
+    RED: '#F22828',
+    BLUE: '#1976D2'
   },
   radius: {
     SMALL: '4px'
