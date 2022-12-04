@@ -4,11 +4,12 @@ import { Card, Container } from './styles'
 
 interface props {
   data: any
+  marginTop: boolean
 }
 
-const CardRepository = ({ data }: props) => {
+const CardRepository = ({ data, marginTop }: props) => {
   return (
-    <Container>
+    <Container marginTop={marginTop}>
       <Card></Card>
     </Container>
   )

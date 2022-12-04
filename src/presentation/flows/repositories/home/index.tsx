@@ -14,10 +14,8 @@ const Home = () => {
 
   return (
     <Container>
-      {}
       {allRepositories?.map((row: any, index: number) => {
-        console.log(row.full_name)
-        return <CardRepository data={row} />
+        return <CardRepository data={row} marginTop={index !== 0} />
       })}
     </Container>
   )

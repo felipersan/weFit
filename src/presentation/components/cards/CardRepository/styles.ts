@@ -1,7 +1,11 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
-  margin-top: 16px;
+interface props {
+  marginTop: boolean
+}
+
+export const Container = styled.View<props>`
+  margin-top: ${({ marginTop }) => (marginTop ? '16px' : '0px')};
   height: 167px;
 `
 
