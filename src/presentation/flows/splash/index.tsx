@@ -8,14 +8,12 @@ export const Splash = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // navigation.navigate('/BottomRouter')
-      // console.log('teste')
+      navigation.navigate('BottomRouter')
     }, 2000)
   }, [])
 
   return (
     <Container>
-      <Text>Teste</Text>
       <Logo />
     </Container>
   )

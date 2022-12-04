@@ -1,21 +1,24 @@
-import React from "react";
-import { Container, Text, Button, SettingsIcon } from "./styles";
+import React from 'react'
+import { StatusBar } from 'react-native'
+import { Container, Text, Button, SettingsIcon, SafeArea } from './styles'
 
 type Props = {
-  title: string;
-  onPress: () => void;
-};
+  title: string
+  onPress: () => void
+}
 
-const Header = ({ title, onPress }: Props) => {
+const Header = (props: Props) => {
   return (
-    <Container>
-      <Text>{title}</Text>
+    <SafeArea>
+      <Container>
+        <Text>{props.title}</Text>
 
-      <Button onPress={onPress}>
-        <SettingsIcon />
-      </Button>
-    </Container>
-  );
-};
+        <Button onPress={props.onPress}>
+          <SettingsIcon />
+        </Button>
+      </Container>
+    </SafeArea>
+  )
+}
 
-export default Header;
+export default Header

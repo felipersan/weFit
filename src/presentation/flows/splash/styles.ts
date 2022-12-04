@@ -6,7 +6,6 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.GRAY_1};
-  background-color: red;
 `
 
 export const Logo = styled.Image.attrs({
