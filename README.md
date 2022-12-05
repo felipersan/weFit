@@ -1,35 +1,11 @@
-# WeFit
-Faça o clone do projeto e depois execute o seguinte comando no terminal, para instalar as dependências:
+# Projeto em React Native Consumindo a API do GitHUb
 
-```bash
-yarn
-```
-ou
-```bash
-npm install
-```
+## Utilização das seguintes tecnologias:
+1. Typescript
+2. React Native
+3. Expo
+4. Axios
+  . Consumo da API de forma mais segura e dinâmica
+5. React Query
+  . A utilização do React Query se deu para que o consumo das rotas fosse componentizado e a responsabilidade fosse tirada da página. Junto à ele vem a possibilidade de invalidação de Query's
 
-Caso esteja no **macOS**, após instalar todas as dependências, execute o seguinte comando no terminal para instalar os pods:
-
-```bash
-cd ios && pod install && cd ..
-```
-Agora você está pronto para rodar o projeto:
-
-> Com expo cli
-
-```bash
-expo run:ios OU expo run:android
-```
-</br>
-
-> Com react native cli
-
-```bash
-npx react-native start
-```
-ou
-
-```bash
-npx react-native run-ios OU npx react-native run-android
-```
