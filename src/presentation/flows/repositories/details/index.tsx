@@ -1,3 +1,4 @@
+import { KeyValuePair } from '@react-native-async-storage/async-storage/lib/typescript/types'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Linking, View } from 'react-native'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
@@ -27,6 +28,7 @@ const Details = ({ route }: any) => {
     removeFavoriteRepository,
     addFavoriteRepository
   } = useContext(RepositoryContext)
+
   useEffect(() => {
     getFavoriteRepository()
   }, [])
@@ -36,13 +38,11 @@ const Details = ({ route }: any) => {
   }, [favorites])
 
   function isFavoriteRepository(repositoryName: string) {
-    const isFavoriteRepo = favorites?.filter((row: any) => {
-      if (row[1].includes(repositoryName) === true) {
-        setIsFavorite(true)
-      } else {
-        setIsFavorite(false)
-      }
+    let repositoryIsFavorite: boolean = false
+    favorites?.map((row: KeyValuePair) => {
+      if (row[0] === repositoryName) repositoryIsFavorite = true
     })
+    setIsFavorite(repositoryIsFavorite)
   }
   ;('')
   return (
