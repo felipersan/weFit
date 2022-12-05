@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useGetAllRepositoriesByNickName } from '../../../../infrastructure/http/repositories/GET/useGetAllRepositories'
 import CardRepository from '../../../components/cards/CardRepository'
 import { RepositoryContext } from '../../../context/repository'
-import { CardAreaScroll, Container } from './styles'
+import { Container } from './styles'
 import { repositorie } from '../../../../@types/repositories'
 
 const Home = ({ props }: any) => {

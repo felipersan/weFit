@@ -39,7 +39,6 @@ export const ImageIcon = styled.Image`
 
 export const TextButton = styled.Text<IProps>`
   font-family: ${({ theme }) => theme.fonts.BOLD};
-  margin-left: 10px;
   color: ${({ color }) => color};
   ${({ size }) =>
     size === '15px' &&
