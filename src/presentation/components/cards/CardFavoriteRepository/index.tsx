@@ -1,5 +1,4 @@
-import React, { useContext, useRef } from 'react'
-import { QueryClient, useQueryClient } from 'react-query'
+import { useQueryClient } from 'react-query'
 
 import { repositorie } from '../../../../@types/repositories'
 import Button from '../../UI/ButtonDefault'
@@ -22,25 +21,13 @@ import {
   TopView
 } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {
-  RepositoryContext,
-  RepositoryProvider
-} from '../../../context/repository'
 
 interface props {
   data: repositorie
   marginTop: boolean
-  changeFavorite: () => void
 }
 
-const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
-  const queryClient = useQueryClient()
-  const { addFavoriteRepository } = useContext(RepositoryContext)
-
-  async function setRepoInAsyncStorage(key: string, value: any) {
-    addFavoriteRepository(key, value)
-  }
-
+const CardFavoriteRepository = ({ data, marginTop }: props) => {
   return (
     <Container marginTop={marginTop}>
       <Card>
@@ -59,19 +46,6 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
             {data?.description ?? 'Esse repositótio não possui descrição'}
           </RepositoryDescription>
           <FavoriteAndLanguageArea>
-            <Button
-              icon={require('../../../assets/images/star.png')}
-              font="bold"
-              full={false}
-              bgColor="#fff"
-              color="#000"
-              Press={() => {
-                setRepoInAsyncStorage(data?.full_name, data)
-              }}
-              iconPosition={'left'}
-              title={'Favoritar'}
-            />
-
             <FavoritesArea>
               <ImageIcon source={require('../../../assets/images/star.png')} />
               <FavoriteTextValue>{data?.stargazers_count}</FavoriteTextValue>
@@ -87,4 +61,4 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
   )
 }
 
-export default CardRepository
+export default CardFavoriteRepository
