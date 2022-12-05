@@ -4,7 +4,7 @@ interface props {
   marginTop: boolean
 }
 
-export const Container = styled.View<props>`
+export const Container = styled.TouchableOpacity<props>`
   margin-top: ${({ marginTop }) => (marginTop ? '16px' : '0px')};
   height: 167px;
 `

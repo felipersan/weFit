@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { Splash } from '../flows/splash'
 import Details from '../flows/repositories/details'
+import HeaderStack from '../components/global/HeaderStack'
 
 export type StackRootParamList = {
   Splash: undefined
@@ -26,7 +27,11 @@ export default function StackRouter() {
         component={BottomRouter}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{ header: () => <HeaderStack /> }}
+      />
     </Stack.Navigator>
   )
 }

@@ -21,6 +21,7 @@ import {
   TopView
 } from './styles'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 
 interface props {
   data: repositorie
@@ -28,8 +29,15 @@ interface props {
 }
 
 const CardFavoriteRepository = ({ data, marginTop }: props) => {
+  const navigation = useNavigation()
+
   return (
-    <Container marginTop={marginTop}>
+    <Container
+      marginTop={marginTop}
+      onPress={() => {
+        navigation.navigate('Details', { params: { id: data } })
+      }}
+    >
       <Card>
         <TopView>
           <RepositoryName>
@@ -43,7 +51,7 @@ const CardFavoriteRepository = ({ data, marginTop }: props) => {
         <ElementSeparator />
         <BottomView>
           <RepositoryDescription>
-            {data?.description ?? 'Esse repositótio não possui descrição'}
+            {data?.description ?? 'Esse repositório não possui descrição'}
           </RepositoryDescription>
           <FavoriteAndLanguageArea>
             <FavoritesArea>

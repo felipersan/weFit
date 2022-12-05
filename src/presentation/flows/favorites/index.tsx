@@ -6,7 +6,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import CardFavoriteRepository from '../../components/cards/CardFavoriteRepository'
 
 const Home = ({ props }: any) => {
-  const { favorites } = useContext(RepositoryContext)
+  const { favorites, getFavoriteRepository } = useContext(RepositoryContext)
+
+  useEffect(() => {
+    getFavoriteRepository()
+  }, [])
 
   // useEffect(() => {
   //   remove()

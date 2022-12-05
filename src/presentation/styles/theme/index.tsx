@@ -12,7 +12,8 @@ export default {
     BLUE: '#1976D2'
   },
   radius: {
-    SMALL: '4px'
+    SMALL: '4px',
+    MEDIUM: '6px'
   },
   shadow: {
     DEFAULT: '0px 1px 10px rgba(0, 0, 0, 0.25)'

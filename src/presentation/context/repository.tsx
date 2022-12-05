@@ -26,6 +26,7 @@ export type RepositoryContextData = {
   toggleUserSelectionModal: () => void
   addFavoriteRepository: (name: string, repository: repositorie) => void
   removeFavoriteRepository: (repository: Repository) => void
+  getFavoriteRepository: () => void
 }
 
 export const RepositoryContext = createContext<RepositoryContextData>(
@@ -60,6 +61,18 @@ export const RepositoryProvider = ({ children }: Children) => {
     // TODO
   }
 
+  async function getFavoriteRepository() {
+    let keys: any = []
+    let values: any = []
+    try {
+      keys = await AsyncStorage.getAllKeys()
+      try {
+        values = await AsyncStorage.multiGet(keys)
+        setFavorites(values)
+      } catch (e) {}
+    } catch (e) {}
+  }
+
   const getUserRepositories = async (user: string) => {}
 
   const { allRepositories } = useGetAllRepositoriesByNickName(repositoryOwner)
@@ -76,7 +89,8 @@ export const RepositoryProvider = ({ children }: Children) => {
         getUserRepositories,
         toggleUserSelectionModal,
         addFavoriteRepository,
-        removeFavoriteRepository
+        removeFavoriteRepository,
+        getFavoriteRepository
       }}
     >
       {children}

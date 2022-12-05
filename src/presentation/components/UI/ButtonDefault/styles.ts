@@ -27,6 +27,8 @@ export const ButtonContainer = styled.TouchableOpacity<IProps>`
 export const ImageIcon = styled.Image`
   width: 20px;
   height: 20px;
+  margin-left: 16px;
+  margin-right: 16px;
 `
 
 export const TextButton = styled.Text<IProps>`

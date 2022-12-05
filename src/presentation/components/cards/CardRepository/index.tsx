@@ -26,6 +26,7 @@ import {
   RepositoryContext,
   RepositoryProvider
 } from '../../../context/repository'
+import { useNavigation } from '@react-navigation/native'
 
 interface props {
   data: repositorie
@@ -37,12 +38,19 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
   const queryClient = useQueryClient()
   const { addFavoriteRepository } = useContext(RepositoryContext)
 
+  const navigation = useNavigation()
+
   async function setRepoInAsyncStorage(key: string, value: any) {
     addFavoriteRepository(key, value)
   }
 
   return (
-    <Container marginTop={marginTop}>
+    <Container
+      marginTop={marginTop}
+      onPress={() => {
+        navigation.navigate('Details', { params: { id: data } })
+      }}
+    >
       <Card>
         <TopView>
           <RepositoryName>
@@ -56,7 +64,7 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
         <ElementSeparator />
         <BottomView>
           <RepositoryDescription>
-            {data?.description ?? 'Esse repositótio não possui descrição'}
+            {data?.description ?? 'Esse repositório não possui descrição'}
           </RepositoryDescription>
           <FavoriteAndLanguageArea>
             <Button
