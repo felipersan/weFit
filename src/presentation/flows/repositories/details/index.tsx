@@ -1,5 +1,5 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useCallback } from 'react'
+import { Linking, View } from 'react-native'
 import { repositorie } from '../../../../@types/repositories'
 import Button from '../../../components/UI/ButtonDefault'
 import {
@@ -13,6 +13,16 @@ import {
   RepositoryNameBold,
   TextLanguage
 } from './styles'
+
+const OpenURLButton = ({ url }: any) => {
+  const handlePress = useCallback(async () => {
+    const supported = await Linking.canOpenURL(url)
+
+    if (supported) {
+      await Linking.openURL(url)
+    }
+  }, [url])
+}
 
 const Details = ({ route }: any) => {
   const data: repositorie = route.params.params.id
@@ -39,7 +49,9 @@ const Details = ({ route }: any) => {
       <BottomButtons>
         <ButtonView>
           <Button
-            Press={() => {}}
+            Press={async () => {
+              await Linking.openURL(data?.html_url)
+            }}
             bgColor={'transparent'}
             color={'#1976D2'}
             full={true}
