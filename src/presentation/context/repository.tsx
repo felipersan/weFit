@@ -5,6 +5,7 @@ import { useGetAllRepositoriesByNickName } from '../../infrastructure/http/repos
 import UserSelectionModal from '../components/UserSelectionModal'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { KeyValuePair } from '@react-native-async-storage/async-storage/lib/typescript/types'
 
 type Children = { children: JSX.Element }
 
@@ -21,11 +22,11 @@ type Repository = {
 
 export type RepositoryContextData = {
   repositories: Array<repositorie> | undefined
-  favorites: Array<repositorie> | undefined
+  favorites: readonly KeyValuePair[] | undefined
   getUserRepositories: (user: string) => Promise<void>
   toggleUserSelectionModal: () => void
   addFavoriteRepository: (name: string, repository: repositorie) => void
-  removeFavoriteRepository: (repository: Repository) => void
+  removeFavoriteRepository: (repository: string) => void
   getFavoriteRepository: () => void
 }
 
@@ -35,7 +36,7 @@ export const RepositoryContext = createContext<RepositoryContextData>(
 
 export const RepositoryProvider = ({ children }: Children) => {
   const [showModal, setShowModal] = useState(false)
-  const [favorites, setFavorites] = useState<Array<repositorie>>()
+  const [favorites, setFavorites] = useState<readonly KeyValuePair[]>()
   const [repositories, setRepositories] = useState<Array<repositorie>>()
   const [repositoryOwner, setRepositoryOwner] = useState('appswefit')
 
@@ -46,8 +47,8 @@ export const RepositoryProvider = ({ children }: Children) => {
     repositorie: repositorie
   ) => {
     await AsyncStorage.setItem(name, JSON.stringify(repositorie))
-    let keys: any = []
-    let values: any = []
+    let keys: readonly string[] = []
+    let values: readonly KeyValuePair[] = []
     try {
       keys = await AsyncStorage.getAllKeys()
       try {
@@ -57,13 +58,13 @@ export const RepositoryProvider = ({ children }: Children) => {
     } catch (e) {}
   }
 
-  const removeFavoriteRepository = async (repository: Repository) => {
-    // TODO
+  const removeFavoriteRepository = async (repositoryName: string) => {
+    await AsyncStorage.removeItem(repositoryName)
   }
 
   async function getFavoriteRepository() {
-    let keys: any = []
-    let values: any = []
+    let keys: readonly string[] = []
+    let values: readonly KeyValuePair[] = []
     try {
       keys = await AsyncStorage.getAllKeys()
       try {

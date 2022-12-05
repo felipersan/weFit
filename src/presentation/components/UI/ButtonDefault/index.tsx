@@ -13,6 +13,8 @@ interface IProps {
   title: string
   font: 'bold' | 'regular' | 'medium'
   size?: string
+  borderSize?: '1px' | '2px' | '3px'
+  borderColor?: string
 }
 
 const Button = ({
@@ -25,10 +27,14 @@ const Button = ({
   full,
   font,
   title,
-  size
+  size,
+  borderColor,
+  borderSize
 }: IProps) => {
   return (
     <ButtonContainer
+      borderColor={borderColor}
+      borderSize={borderSize}
       font={font}
       full={full}
       bgColor={bgColor && bgColor}

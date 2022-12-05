@@ -2,11 +2,13 @@ import styled, { css } from 'styled-components/native'
 
 interface IProps {
   bgColor?: string
-  color: any
+  color: string
   shadow?: boolean
   full: boolean
   font: 'bold' | 'regular' | 'medium'
   size?: string
+  borderSize?: '1px' | '2px' | '3px'
+  borderColor?: string
 }
 
 export const ButtonContainer = styled.TouchableOpacity<IProps>`
@@ -22,6 +24,10 @@ export const ButtonContainer = styled.TouchableOpacity<IProps>`
   align-items: center;
   justify-content: center;
   border-radius: ${({ theme }) => theme.radius.SMALL};
+
+  border-color: ${({ borderColor }) => borderColor};
+  border-width: ${({ borderSize }) => borderSize};
+  border-style: solid;
 `
 
 export const ImageIcon = styled.Image`

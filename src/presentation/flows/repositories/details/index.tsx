@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Linking, View } from 'react-native'
+import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { repositorie } from '../../../../@types/repositories'
 import Button from '../../../components/UI/ButtonDefault'
+import { RepositoryContext } from '../../../context/repository'
 import {
   BottomButtons,
   ButtonView,
@@ -14,21 +16,35 @@ import {
   TextLanguage
 } from './styles'
 
-const OpenURLButton = ({ url }: any) => {
-  const handlePress = useCallback(async () => {
-    const supported = await Linking.canOpenURL(url)
-
-    if (supported) {
-      await Linking.openURL(url)
-    }
-  }, [url])
-}
-
 const Details = ({ route }: any) => {
+  const [isFavorite, setIsFavorite] = useState<boolean>(false)
+
   const data: repositorie = route.params.params.id
 
-  console.log(data)
+  const {
+    favorites,
+    getFavoriteRepository,
+    removeFavoriteRepository,
+    addFavoriteRepository
+  } = useContext(RepositoryContext)
+  useEffect(() => {
+    getFavoriteRepository()
+  }, [])
 
+  useEffect(() => {
+    isFavoriteRepository(data?.full_name)
+  }, [favorites])
+
+  function isFavoriteRepository(repositoryName: string) {
+    const isFavoriteRepo = favorites?.filter((row: any) => {
+      if (row[1].includes(repositoryName) === true) {
+        setIsFavorite(true)
+      } else {
+        setIsFavorite(false)
+      }
+    })
+  }
+  ;('')
   return (
     <>
       <Container>
@@ -47,33 +63,56 @@ const Details = ({ route }: any) => {
         </RepositoryLanguage>
       </Container>
       <BottomButtons>
-        <ButtonView>
-          <Button
-            Press={async () => {
-              await Linking.openURL(data?.html_url)
-            }}
-            bgColor={'transparent'}
-            color={'#1976D2'}
-            full={true}
-            font={'bold'}
-            title={'VER REPOSITÓRIO'}
-            size={'15px'}
-            icon={require('../../../assets/images/link.png')}
-            iconPosition={'rigth'}
-          />
-        </ButtonView>
         <Button
-          Press={() => {}}
-          bgColor={'#FFD02C'}
-          color={'#000'}
+          Press={async () => {
+            await Linking.openURL(data?.html_url)
+          }}
+          bgColor={'transparent'}
+          color={'#1976D2'}
           full={true}
           font={'bold'}
-          title={'FAVORITAR'}
-          shadow
+          title={'VER REPOSITÓRIO'}
           size={'15px'}
-          icon={require('../../../assets/images/blackStar.png')}
+          icon={require('../../../assets/images/link.png')}
           iconPosition={'rigth'}
         />
+        <ButtonView>
+          {isFavorite === true ? (
+            <Button
+              Press={() => {
+                removeFavoriteRepository(data?.full_name)
+                getFavoriteRepository()
+              }}
+              bgColor={'transparent'}
+              borderColor={'#000'}
+              borderSize={'1px'}
+              color={'#000'}
+              full={true}
+              font={'bold'}
+              title={'DESFAVORITAR'}
+              shadow
+              size={'15px'}
+              icon={require('../../../assets/images/blackStar.png')}
+              iconPosition={'rigth'}
+            />
+          ) : (
+            <Button
+              Press={() => {
+                addFavoriteRepository(data?.full_name, data)
+                getFavoriteRepository()
+              }}
+              bgColor={'#FFD02C'}
+              color={'#000'}
+              full={true}
+              font={'bold'}
+              title={'FAVORITAR'}
+              shadow
+              size={'15px'}
+              icon={require('../../../assets/images/blackStar.png')}
+              iconPosition={'rigth'}
+            />
+          )}
+        </ButtonView>
       </BottomButtons>
     </>
   )

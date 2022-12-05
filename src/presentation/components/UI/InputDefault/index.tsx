@@ -1,13 +1,10 @@
 import React from 'react'
-import { Text } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler'
-import Button from '../ButtonDefault'
 import { Container, Input, TitleContainer } from './styles'
 
 interface IProps {
   title: string
   value: string
-  change: (e: any) => void
+  change: (e: string) => void
   placeholder: string
 }
 

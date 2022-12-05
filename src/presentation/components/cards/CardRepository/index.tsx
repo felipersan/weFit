@@ -40,7 +40,7 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
 
   const navigation = useNavigation()
 
-  async function setRepoInAsyncStorage(key: string, value: any) {
+  async function setRepoInAsyncStorage(key: string, value: repositorie) {
     addFavoriteRepository(key, value)
   }
 
@@ -71,8 +71,8 @@ const CardRepository = ({ data, marginTop, changeFavorite }: props) => {
               icon={require('../../../assets/images/star.png')}
               font="bold"
               full={false}
-              bgColor="#fff"
-              color="#000"
+              bgColor="#FAF3DC"
+              color="#FFD02C"
               Press={() => {
                 setRepoInAsyncStorage(data?.full_name, data)
               }}

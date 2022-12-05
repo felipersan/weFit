@@ -27,7 +27,6 @@ const Home = ({ props }: any) => {
     <Container>
       {repositories?.map((row: repositorie, index: number) => {
         const isFavorite = favoriteReposKeys.includes(row?.full_name)
-        console.log(isFavorite)
         if (!isFavorite) {
           return (
             <CardRepository

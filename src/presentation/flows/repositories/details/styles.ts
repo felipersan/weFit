@@ -61,5 +61,6 @@ export const BottomButtons = styled.View`
 `
 
 export const ButtonView = styled.View`
-  margin-bottom: 16px;
+  margin-top: 10px;
+  height: 56px;
 `
