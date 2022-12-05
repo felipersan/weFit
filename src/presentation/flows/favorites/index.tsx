@@ -15,7 +15,6 @@ const Home = ({ props }: any) => {
   return (
     <Container>
       {favorites?.map((row: any, index: number) => {
-        console.log('row ==============>', row)
         return (
           <CardFavoriteRepository
             key={index}

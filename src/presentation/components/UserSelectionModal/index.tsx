@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useModalize } from 'react-native-modalize'
+import { RepositoryContext } from '../../context/repository'
 import Button from '../UI/ButtonDefault'
 import InputDefault from '../UI/InputDefault'
 import { AreaButons, Container, TitleModal } from './styles'
@@ -13,6 +14,8 @@ type Props = {
 const UserSelectionModal = ({ visible, onClose, onSearch }: Props) => {
   const { ref, open, close } = useModalize()
   const [userSearch, setUserSearch] = useState<string>('felipersan')
+
+  const { toggleUserSelectionModal } = useContext(RepositoryContext)
 
   useEffect(() => {
     visible ? open() : close()
@@ -31,7 +34,9 @@ const UserSelectionModal = ({ visible, onClose, onSearch }: Props) => {
       />
       <AreaButons>
         <Button
-          Press={() => {}}
+          Press={() => {
+            toggleUserSelectionModal()
+          }}
           bgColor={'transparent'}
           color={'#1976D2'}
           full={true}
